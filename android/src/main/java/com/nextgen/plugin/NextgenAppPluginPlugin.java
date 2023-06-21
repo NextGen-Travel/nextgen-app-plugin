@@ -31,6 +31,7 @@ public class NextgenAppPluginPlugin extends Plugin {
 
     @PluginMethod
     public void wxInit(PluginCall call) {
+        Log.i("Echo", "Wx Init");
         Context context = bridge.getContext();
         String appId = call.getString("appId");
         api = WXAPIFactory.createWXAPI(context, appId, true);
@@ -40,6 +41,7 @@ public class NextgenAppPluginPlugin extends Plugin {
 
     @PluginMethod
     public void wxLogin(PluginCall call) {
+        Log.i("Echo", "Wx Login");
         final SendAuth.Req req = new SendAuth.Req();
         req.scope = "snsapi_userinfo";
         req.state = "wechat";
