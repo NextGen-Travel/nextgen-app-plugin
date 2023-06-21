@@ -3,7 +3,6 @@ package com.nextgen.plugin;
 import android.os.Bundle;
 import android.util.Log;
 import android.app.Activity;
-import android.app.Application;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -65,9 +64,6 @@ class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     public void login(PluginCall call) {
         Log.i("Echo", "Wx Login");
         Log.i("Echo", api != null ? "A" : "N");
-        api = WXAPIFactory.createWXAPI(this, appId, true);
-        api.registerApp(appId);
-        api.handleIntent(getIntent(), this);
         if (api != null && api.isWXAppInstalled()) {
             final SendAuth.Req req = new SendAuth.Req();
             req.scope = "snsapi_userinfo";
