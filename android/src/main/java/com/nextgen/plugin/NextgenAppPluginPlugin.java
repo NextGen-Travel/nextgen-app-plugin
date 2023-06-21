@@ -1,5 +1,6 @@
 package com.nextgen.plugin;
 
+import android.content.Intent;
 import android.util.Log;
 
 import com.getcapacitor.JSObject;
@@ -8,14 +9,16 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
+import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 
 @CapacitorPlugin(name = "NextgenAppPlugin")
-public class NextgenAppPluginPlugin extends Plugin {
+public class NextgenAppPluginPlugin extends Plugin implements IWXAPIEventHandler {
     private IWXAPI api;
     private PluginCall callback;
     private NextgenAppPlugin implementation = new NextgenAppPlugin();
@@ -31,11 +34,16 @@ public class NextgenAppPluginPlugin extends Plugin {
     @PluginMethod
     public void wxInit(PluginCall call) {
         Log.i("Echo", "Wx Init");
+        Intent intent = this.getActivity().getIntent();
         String appId = call.getString("appId");
         api = WXAPIFactory.createWXAPI(this.getContext(), appId, true);
         api.registerApp(appId);
+        api.handleIntent(intent, this);
         call.resolve();
     }
+
+
+    public void onReq(BaseReq baseReq) {}
     public void onResp(BaseResp baseResp) {
         // 在這裡處理微信回應事件
         if (baseResp instanceof SendAuth.Resp) {
