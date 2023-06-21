@@ -30,12 +30,10 @@ class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        api = WXAPIFactory.createWXAPI(this, appId, false);
+        api = WXAPIFactory.createWXAPI(this, appId, true);
+        api.registerApp(appId);
         api.handleIntent(getIntent(), this);
-    }
-
-    public void regCallback(PluginCall cb) {
-        callback = cb;
+        Log.i("Echo", "Wx Inited");
     }
 
     @Override
@@ -66,15 +64,15 @@ class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     public void login(PluginCall call) {
         Log.i("Echo", "Wx Login");
-        final SendAuth.Req req = new SendAuth.Req();
-        req.scope = "snsapi_userinfo";
-        req.state = "wechat";
-        callback = call;
-        if (api == null) {
-            api = WXAPIFactory.createWXAPI(this, appId, false);
-            api.handleIntent(getIntent(), this);
+        if (api != null && api.isWXAppInstalled()) {
+            final SendAuth.Req req = new SendAuth.Req();
+            req.scope = "snsapi_userinfo";
+            req.state = "wechat";
+            callback = call;
+            api.sendReq(req);
+        } else {
+            Log.i("Echo", "Wx no Installed");
         }
-        api.sendReq(req);
     }
 }
 
