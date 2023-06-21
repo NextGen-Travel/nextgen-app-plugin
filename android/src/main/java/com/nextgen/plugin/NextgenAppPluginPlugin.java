@@ -65,6 +65,9 @@ class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     public void login(PluginCall call) {
         Log.i("Echo", "Wx Login");
         Log.i("Echo", api != null ? "A" : "N");
+        api = WXAPIFactory.createWXAPI(this, appId, true);
+        api.registerApp(appId);
+        api.handleIntent(getIntent(), this);
         if (api != null && api.isWXAppInstalled()) {
             final SendAuth.Req req = new SendAuth.Req();
             req.scope = "snsapi_userinfo";
