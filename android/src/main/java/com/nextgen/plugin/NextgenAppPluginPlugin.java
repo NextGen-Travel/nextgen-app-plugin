@@ -32,6 +32,30 @@ public class NextgenAppPluginPlugin extends Plugin {
     @PluginMethod
     public void wxInit(PluginCall call) {
         Log.i("Echo", "Wx Init");
+
+        IWXAPIEventHandler wxEventHandler = new IWXAPIEventHandler() {
+            public void onResp(BaseResp baseResp) {
+                // 在這裡處理微信回應事件
+                if (baseResp == SendTdiAuth.Resp) {
+                    SendAuth.Resp authResp = (SendTdiAuth.Resp) baseResp;
+                    String code = authResp.code;
+                    PluginCall savedCall = bridge.getSavedCall(CallbackId);
+                    if (savedCall != null) {
+                        if (code != null) {
+                            JSObject ret = new JSObject();
+                            // 在這裡處理登錄成功後的邏輯，例如獲取用戶資訊等
+                            ret.put("token", code);
+                            savedCall.resolve(ret);
+                        } else {
+                            // 登錄失敗
+                            savedCall.reject("LOGIN_FAILED");
+                        }
+                        bridge.releaseCall(CallbackId);
+                    }
+                }
+            };
+        };
+
         Context context = bridge.getContext();
         String appId = call.getString("appId");
         api = WXAPIFactory.createWXAPI(context, appId, true);
@@ -48,25 +72,5 @@ public class NextgenAppPluginPlugin extends Plugin {
         api.sendReq(req);
         CallbackId = call.getCallbackId();
         bridge.saveCall(call);
-    }
-
-    @Override
-    protected void handleOnActivityResult(int requestCode, int resultCode, Intent data) {
-        super.handleOnActivityResult(requestCode, resultCode, data);
-        PluginCall savedCall = bridge.getSavedCall(CallbackId);
-        Log.i("Echo", String.valueOf(requestCode));
-        if (savedCall != null) {
-            String code = data.getStringExtra("_wxapi_sendauth_resp_token");
-            if (code != null) {
-                JSObject ret = new JSObject();
-                // 在這裡處理登錄成功後的邏輯，例如獲取用戶資訊等
-                ret.put("token", code);
-                savedCall.resolve(ret);
-            } else {
-                // 登錄失敗
-                savedCall.reject("LOGIN_FAILED");
-            }
-            bridge.releaseCall(CallbackId);
-        }
     }
 }
