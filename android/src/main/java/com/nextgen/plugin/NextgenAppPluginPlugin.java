@@ -43,18 +43,20 @@ public class NextgenAppPluginPlugin extends Plugin {
         req.scope = "snsapi_userinfo";
         req.state = "wechat";
         api.sendReq(req);
-        saveCall(call);
+        Bridge.saveCall(call);
     }
 
     @Override
     protected void handleOnActivityResult(int requestCode, int resultCode, Intent data) {
         super.handleOnActivityResult(requestCode, resultCode, data);
-        PluginCall savedCall = getSavedCall();
+        PluginCall savedCall = Bridge.getSavedCall();
         if (savedCall != null && requestCode == ConstantsAPI.COMMAND_SENDAUTH) {
             String code = data.getStringExtra("_wxapi_sendauth_resp_token");
             if (code != null) {
+                JSObject ret = new JSObject();
                 // 在這裡處理登錄成功後的邏輯，例如獲取用戶資訊等
-                savedCall.resolve(code);
+                ret.put("token", code);
+                savedCall.resolve(ret);
             } else {
                 // 登錄失敗
                 savedCall.reject("LOGIN_FAILED");
