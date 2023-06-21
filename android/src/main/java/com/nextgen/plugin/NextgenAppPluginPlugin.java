@@ -64,7 +64,7 @@ public class NextgenAppPluginPlugin extends Plugin {
                 // 登錄失敗
                 savedCall.reject("LOGIN_FAILED");
             }
-            releaseCall();
+            bridge.releaseCall(CallbackId);
         }
     }
 }
