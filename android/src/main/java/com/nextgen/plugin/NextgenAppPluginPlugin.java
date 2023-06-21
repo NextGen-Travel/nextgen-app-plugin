@@ -3,6 +3,7 @@ package com.nextgen.plugin;
 import android.os.Bundle;
 import android.util.Log;
 import android.app.Activity;
+import android.app.Application;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -22,13 +23,11 @@ class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     IWXAPI api;
     private PluginCall callback;
-    public void init(String appId){
-        api = WXAPIFactory.createWXAPI(this, appId, false);
-        api.handleIntent(getIntent(), this);
-    }
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        api = WXAPIFactory.createWXAPI(this, "1234", false);
+        api.handleIntent(getIntent(), this);
     }
 
     public void regCallback(PluginCall cb) {
@@ -80,7 +79,6 @@ public class NextgenAppPluginPlugin extends Plugin {
         Log.i("Echo", "Wx Init");
         String appId = call.getString("appId");
         activity = new WXEntryActivity();
-        activity.init(appId);
         call.resolve();
     }
 
