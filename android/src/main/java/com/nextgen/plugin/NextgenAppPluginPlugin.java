@@ -70,6 +70,10 @@ class WXEntryActivity extends Activity implements IWXAPIEventHandler {
         req.scope = "snsapi_userinfo";
         req.state = "wechat";
         callback = call;
+        if (api == null) {
+            api = WXAPIFactory.createWXAPI(this, appId, false);
+            api.handleIntent(getIntent(), this);
+        }
         api.sendReq(req);
     }
 }
