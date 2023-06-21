@@ -1,5 +1,6 @@
 package com.nextgen.plugin;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.app.Activity;
 
@@ -25,6 +26,11 @@ class WXEntryActivity extends Activity implements IWXAPIEventHandler {
         api = WXAPIFactory.createWXAPI(this, appId, false);
         api.handleIntent(getIntent(), this);
     }
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        finish();
+    }
+
     public void regCallback(PluginCall cb) {
         callback = cb;
     }
