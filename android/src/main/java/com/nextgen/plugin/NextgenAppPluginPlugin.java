@@ -76,7 +76,7 @@ class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
 @CapacitorPlugin(name = "NextgenAppPlugin")
 public class NextgenAppPluginPlugin extends Plugin {
-    private WXEntryActivity activity = new WXEntryActivity();
+    private WXEntryActivity activity;
     private NextgenAppPlugin implementation = new NextgenAppPlugin();
 
     @PluginMethod
