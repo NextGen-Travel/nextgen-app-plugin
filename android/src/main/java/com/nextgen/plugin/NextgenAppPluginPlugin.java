@@ -18,6 +18,7 @@ public class NextgenAppPluginPlugin extends Plugin {
 
     private IWXAPI api;
     private NextgenAppPlugin implementation = new NextgenAppPlugin();
+    private String CallbackId = "";
 
     @PluginMethod
     public void echo(PluginCall call) {
@@ -42,13 +43,14 @@ public class NextgenAppPluginPlugin extends Plugin {
         req.scope = "snsapi_userinfo";
         req.state = "wechat";
         api.sendReq(req);
-        Bridge.saveCall(call);
+        CallbackId = call.getCallbackId();
+        bridge.saveCall(call);
     }
 
     @Override
     protected void handleOnActivityResult(int requestCode, int resultCode, Intent data) {
         super.handleOnActivityResult(requestCode, resultCode, data);
-        PluginCall savedCall = Bridge.getSavedCall();
+        PluginCall savedCall = bridge.getSavedCall(CallbackId);
         if (savedCall != null && requestCode == ConstantsAPI.COMMAND_SENDAUTH) {
             String code = data.getStringExtra("_wxapi_sendauth_resp_token");
             if (code != null) {
