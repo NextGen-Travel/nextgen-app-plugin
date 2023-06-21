@@ -46,6 +46,7 @@ public class NextgenAppPluginPlugin extends Plugin implements IWXAPIEventHandler
     public void onReq(BaseReq baseReq) {}
     public void onResp(BaseResp baseResp) {
         // 在這裡處理微信回應事件
+        Log.i("Echo", "Wx Callback");
         if (baseResp instanceof SendAuth.Resp) {
             SendAuth.Resp authResp = (SendAuth.Resp) baseResp;
             String code = authResp.code;
