@@ -26,9 +26,9 @@ class WXEntryActivity extends Activity implements IWXAPIEventHandler {
         api = WXAPIFactory.createWXAPI(this, appId, false);
         api.handleIntent(getIntent(), this);
     }
+    @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        finish();
     }
 
     public void regCallback(PluginCall cb) {
@@ -36,7 +36,9 @@ class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     }
 
     @Override
-    public void onReq(BaseReq baseReq) {}
+    public void onReq(BaseReq baseReq) {
+        finish();
+    }
 
     @Override
     public void onResp(BaseResp baseResp) {
