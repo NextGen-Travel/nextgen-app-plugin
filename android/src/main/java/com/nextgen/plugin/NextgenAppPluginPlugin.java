@@ -60,6 +60,7 @@ public class NextgenAppPluginPlugin extends Plugin {
         String appId = call.getString("appId");
         api = WXAPIFactory.createWXAPI(context, appId, true);
         api.registerApp(appId);
+        api.handleIntent(getIntent(), wxEventHandler);
         call.resolve();
     }
 
