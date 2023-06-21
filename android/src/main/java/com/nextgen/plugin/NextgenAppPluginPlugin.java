@@ -20,13 +20,17 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 
 class WXEntryActivity extends Activity implements IWXAPIEventHandler {
-
-    IWXAPI api;
+    private String appId;
+    private IWXAPI api;
     private PluginCall callback;
+    public WXEntryActivity(String aid) {
+        appId = aid;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        api = WXAPIFactory.createWXAPI(this, "1234", false);
+        api = WXAPIFactory.createWXAPI(this, appId, false);
         api.handleIntent(getIntent(), this);
     }
 
@@ -59,6 +63,15 @@ class WXEntryActivity extends Activity implements IWXAPIEventHandler {
             }
         }
     }
+
+    public void login(PluginCall call) {
+        Log.i("Echo", "Wx Login");
+        final SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+        req.state = "wechat";
+        callback = call;
+        api.sendReq(req);
+    }
 }
 
 @CapacitorPlugin(name = "NextgenAppPlugin")
@@ -78,17 +91,13 @@ public class NextgenAppPluginPlugin extends Plugin {
     public void wxInit(PluginCall call) {
         Log.i("Echo", "Wx Init");
         String appId = call.getString("appId");
-        activity = new WXEntryActivity();
+        activity = new WXEntryActivity(appId);
         call.resolve();
     }
 
     @PluginMethod
     public void wxLogin(PluginCall call) {
         Log.i("Echo", "Wx Login");
-        activity.regCallback(call);
-        final SendAuth.Req req = new SendAuth.Req();
-        req.scope = "snsapi_userinfo";
-        req.state = "wechat";
-        activity.api.sendReq(req);
+        activity.login(call);
     }
 }
