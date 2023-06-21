@@ -25,14 +25,21 @@ class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     private PluginCall callback;
     public WXEntryActivity(String aid) {
         appId = aid;
+        initApi();
+    }
+
+    public void initApi() {
+        if (api == null) {
+            api = WXAPIFactory.createWXAPI(this, appId, true);
+            api.registerApp(appId);
+            api.handleIntent(getIntent(), this);
+        }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        api = WXAPIFactory.createWXAPI(this, appId, true);
-        api.registerApp(appId);
-        api.handleIntent(getIntent(), this);
+        initApi();
         Log.i("Echo", "Wx Inited");
     }
 
