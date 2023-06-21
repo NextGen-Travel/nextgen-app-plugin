@@ -1,27 +1,13 @@
 var capacitorNextgenAppPlugin = (function (exports, core) {
-    'use strict';
+	'use strict';
 
-    const NextgenAppPlugin = core.registerPlugin('NextgenAppPlugin', {
-        web: () => Promise.resolve().then(function () { return web; }).then(m => new m.NextgenAppPluginWeb()),
-    });
+	const NextgenAppPlugin = core.registerPlugin('NextgenAppPlugin', {});
 
-    class NextgenAppPluginWeb extends core.WebPlugin {
-        async echo(options) {
-            console.log('ECHO', options);
-            return options;
-        }
-    }
+	exports.NextgenAppPlugin = NextgenAppPlugin;
 
-    var web = /*#__PURE__*/Object.freeze({
-        __proto__: null,
-        NextgenAppPluginWeb: NextgenAppPluginWeb
-    });
+	Object.defineProperty(exports, '__esModule', { value: true });
 
-    exports.NextgenAppPlugin = NextgenAppPlugin;
-
-    Object.defineProperty(exports, '__esModule', { value: true });
-
-    return exports;
+	return exports;
 
 })({}, capacitorExports);
 //# sourceMappingURL=plugin.js.map

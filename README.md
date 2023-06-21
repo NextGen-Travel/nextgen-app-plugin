@@ -14,6 +14,8 @@ npx cap sync
 <docgen-index>
 
 * [`echo(...)`](#echo)
+* [`wxInit(...)`](#wxinit)
+* [`wxLogin()`](#wxlogin)
 
 </docgen-index>
 
@@ -31,6 +33,32 @@ echo(options: { value: string; }) => Promise<{ value: string; }>
 | **`options`** | <code>{ value: string; }</code> |
 
 **Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
+
+--------------------
+
+
+### wxInit(...)
+
+```typescript
+wxInit(params: { appId: string; }) => Promise<any>
+```
+
+| Param        | Type                            |
+| ------------ | ------------------------------- |
+| **`params`** | <code>{ appId: string; }</code> |
+
+**Returns:** <code>Promise&lt;any&gt;</code>
+
+--------------------
+
+
+### wxLogin()
+
+```typescript
+wxLogin() => Promise<any>
+```
+
+**Returns:** <code>Promise&lt;any&gt;</code>
 
 --------------------
 
