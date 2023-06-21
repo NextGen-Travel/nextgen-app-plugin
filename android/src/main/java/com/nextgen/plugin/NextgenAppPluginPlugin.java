@@ -1,5 +1,6 @@
 package com.nextgen.plugin;
 
+import android.util.Log;
 import android.content.Intent;
 import android.content.Context;
 
@@ -51,7 +52,8 @@ public class NextgenAppPluginPlugin extends Plugin {
     protected void handleOnActivityResult(int requestCode, int resultCode, Intent data) {
         super.handleOnActivityResult(requestCode, resultCode, data);
         PluginCall savedCall = bridge.getSavedCall(CallbackId);
-        if (savedCall != null && requestCode == ConstantsAPI.COMMAND_SENDAUTH) {
+        Log.i("Echo", requestCode);
+        if (savedCall != null) {
             String code = data.getStringExtra("_wxapi_sendauth_resp_token");
             if (code != null) {
                 JSObject ret = new JSObject();
