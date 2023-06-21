@@ -1,6 +1,8 @@
 package com.nextgen.plugin;
 
 import android.content.Intent;
+import android.content.Context;
+
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
@@ -28,8 +30,9 @@ public class NextgenAppPluginPlugin extends Plugin {
 
     @PluginMethod
     public void wxInit(PluginCall call) {
+        Context context = bridge.getContext();
         String appId = call.getString("appId");
-        api = WXAPIFactory.createWXAPI(this, appId, true);
+        api = WXAPIFactory.createWXAPI(context, appId, true);
         api.registerApp(appId);
         call.resolve();
     }
