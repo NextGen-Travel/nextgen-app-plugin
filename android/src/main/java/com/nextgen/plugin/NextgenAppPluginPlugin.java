@@ -1,6 +1,7 @@
 package com.nextgen.plugin;
 
 import android.util.Log;
+import android.app.Activity;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -9,20 +10,21 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
-
-
-import android.app.Activity;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
+
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 
 class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
+    IWXAPI api;
     private PluginCall callback;
-
+    public void init(String appId){
+        api = WXAPIFactory.createWXAPI(this, appId, false);
+        api.handleIntent(getIntent(), this);
+    }
     public void regCallback(PluginCall cb) {
         callback = cb;
     }
@@ -54,8 +56,6 @@ class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
 @CapacitorPlugin(name = "NextgenAppPlugin")
 public class NextgenAppPluginPlugin extends Plugin {
-
-    private IWXAPI api;
     private WXEntryActivity activity = new WXEntryActivity();
     private NextgenAppPlugin implementation = new NextgenAppPlugin();
 
@@ -71,8 +71,8 @@ public class NextgenAppPluginPlugin extends Plugin {
     public void wxInit(PluginCall call) {
         Log.i("Echo", "Wx Init");
         String appId = call.getString("appId");
-        api = WXAPIFactory.createWXAPI(activity, appId, true);
-        api.registerApp(appId);
+        activity = new WXEntryActivity();
+        activity.init(appId);
         call.resolve();
     }
 
@@ -83,6 +83,6 @@ public class NextgenAppPluginPlugin extends Plugin {
         final SendAuth.Req req = new SendAuth.Req();
         req.scope = "snsapi_userinfo";
         req.state = "wechat";
-        api.sendReq(req);
+        activity.api.sendReq(req);
     }
 }
