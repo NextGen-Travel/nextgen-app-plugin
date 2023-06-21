@@ -52,7 +52,7 @@ public class NextgenAppPluginPlugin extends Plugin {
     protected void handleOnActivityResult(int requestCode, int resultCode, Intent data) {
         super.handleOnActivityResult(requestCode, resultCode, data);
         PluginCall savedCall = bridge.getSavedCall(CallbackId);
-        Log.i("Echo", requestCode);
+        Log.i("Echo", String.valueOf(requestCode));
         if (savedCall != null) {
             String code = data.getStringExtra("_wxapi_sendauth_resp_token");
             if (code != null) {
