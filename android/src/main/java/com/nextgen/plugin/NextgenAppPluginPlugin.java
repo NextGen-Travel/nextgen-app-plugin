@@ -1,5 +1,6 @@
 package com.nextgen.plugin;
 
+import android.content.Intent;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
@@ -10,7 +11,6 @@ import com.getcapacitor.BridgeActivity;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
 
 @CapacitorPlugin(name = "NextgenAppPlugin")
 public class NextgenAppPluginPlugin extends Plugin {
