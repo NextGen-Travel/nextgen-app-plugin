@@ -1,10 +1,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application>
         <activity
-            android:name=".wxapi.WXEntryActivity"
+            android:name="com.nextgen.plugin.WXEntryActivity"
             android:label="WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="true"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:launchMode="singleTask">
+        </activity>
+
+        <activity-alias
+            android:name="com.YOUR_PACKAGE_NAME.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:targetActivity="com.nextgen.plugin.WXEntryActivity" >
+        </activity-alias>
     </application>
 
     <queries>
