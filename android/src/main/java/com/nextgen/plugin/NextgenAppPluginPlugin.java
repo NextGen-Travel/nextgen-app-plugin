@@ -32,7 +32,7 @@ public class NextgenAppPluginPlugin extends Plugin {
     public void wxInit(PluginCall call) {
         Log.i("Echo", "Wx Init");
         String appId = call.getString("appId");
-        api = WXAPIFactory.createWXAPI(getContext(), appId, true);
+        api = WXAPIFactory.createWXAPI(getContext(), appId, false);
         api.registerApp(appId);
         call.resolve();
     }
