@@ -39,6 +39,9 @@ class Handler implements IWXAPIEventHandler {
             }
         }
     }
+    public void onSendFinished() {
+        Log.i("Echo", "Wx Finished");
+    }
 }
 
 @CapacitorPlugin(name = "NextgenAppPlugin")
