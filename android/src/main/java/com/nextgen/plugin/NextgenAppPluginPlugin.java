@@ -14,6 +14,7 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 
 import com.tencent.mm.opensdk.openapi.IWXAPI;
+
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 
@@ -36,12 +37,11 @@ public class NextgenAppPluginPlugin extends Plugin implements IWXAPIEventHandler
         Log.i("Echo", "Wx Init");
         Intent intent = this.getActivity().getIntent();
         String appId = call.getString("appId");
-        api = WXAPIFactory.createWXAPI(this.getContext(), appId, true);
+        api = WXAPIFactory.createWXAPI(getContext(), appId, true);
         api.registerApp(appId);
         api.handleIntent(intent, this);
         call.resolve();
     }
-
 
     public void onReq(BaseReq baseReq) {}
     public void onResp(BaseResp baseResp) {
