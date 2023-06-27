@@ -8,7 +8,6 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
-
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
@@ -17,7 +16,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 class Handler implements IWXAPIEventHandler {
-    private PluginCall callback;
+    PluginCall callback;
     public void onReq(BaseReq baseReq) {}
     public void onResp(BaseResp baseResp) {
         // 在這裡處理微信回應事件
@@ -71,9 +70,9 @@ public class NextgenAppPluginPlugin extends Plugin {
     public void wxLogin(PluginCall call) {
         Log.i("Echo", "Wx Login");
         final SendAuth.Req req = new SendAuth.Req();
+        handler.callback = call;
         req.scope = "snsapi_userinfo";
         req.state = "wechat";
         api.sendReq(req);
-        call.resolve();
     }
 }
