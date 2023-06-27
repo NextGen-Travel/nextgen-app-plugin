@@ -6,4 +6,8 @@
             android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
+
+    <queries>
+        <package android:name="com.tencent.mm" />
+    </queries>
 </manifest>
