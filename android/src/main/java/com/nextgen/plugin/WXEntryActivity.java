@@ -17,6 +17,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     static IWXAPI api;
+    static PluginCall callback;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,20 +50,20 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
         Log.i("Echo", "Wx Callback");
         Log.i("Echo", baseResp.toString());
         if (baseResp instanceof SendAuth.Resp) {
-//            SendAuth.Resp authResp = (SendAuth.Resp) baseResp;
-//            String code = authResp.code;
-//            if (callback != null) {
-//                if (code != null) {
-//                    JSObject ret = new JSObject();
-//                    // 在這裡處理登錄成功後的邏輯，例如獲取用戶資訊等
-//                    ret.put("token", code);
-//                    callback.resolve(ret);
-//                } else {
-//                    // 登錄失敗
-//                    callback.reject("LOGIN_FAILED");
-//                }
-//                callback = null;
-//            }
+            SendAuth.Resp authResp = (SendAuth.Resp) baseResp;
+            String code = authResp.code;
+            if (callback != null) {
+                if (code != null) {
+                    JSObject ret = new JSObject();
+                    // 在這裡處理登錄成功後的邏輯，例如獲取用戶資訊等
+                    ret.put("token", code);
+                    callback.resolve(ret);
+                } else {
+                    // 登錄失敗
+                    callback.reject("LOGIN_FAILED");
+                }
+                callback = null;
+            }
         }
         finish();
     }

@@ -37,6 +37,7 @@ public class NextgenAppPluginPlugin extends Plugin {
     public void wxLogin(PluginCall call) {
         Log.i("Echo", "Wx Login");
         final SendAuth.Req req = new SendAuth.Req();
+        WXEntryActivity.callback = call;
         req.scope = "snsapi_userinfo";
         req.state = "wechat";
         WXEntryActivity.api.sendReq(req);
