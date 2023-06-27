@@ -47,8 +47,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onResp(BaseResp baseResp) {
-        Log.i("Echo", "Wx Callback");
-        Log.i("Echo", baseResp.toString());
+        Log.i("Echo", "Wx Resp");
         if (baseResp instanceof SendAuth.Resp) {
             SendAuth.Resp authResp = (SendAuth.Resp) baseResp;
             String code = authResp.code;
