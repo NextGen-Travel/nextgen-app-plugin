@@ -15,6 +15,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 @CapacitorPlugin(name = "NextgenAppPlugin")
 public class NextgenAppPluginPlugin extends Plugin {
     private NextgenAppPlugin implementation = new NextgenAppPlugin();
+    static String WX_APP_ID = "";
 
     @PluginMethod
     public void echo(PluginCall call) {
@@ -27,9 +28,9 @@ public class NextgenAppPluginPlugin extends Plugin {
     @PluginMethod
     public void wxInit(PluginCall call) {
         Log.i("Echo", "Wx Init");
-        String appId = call.getString("appId");
-//        WXEntryActivity.api = WXAPIFactory.createWXAPI(getContext(), appId, false);
-//        WXEntryActivity.api.registerApp(appId);
+        WX_APP_ID = call.getString("appId");
+        WXEntryActivity.api = WXAPIFactory.createWXAPI(getContext(), WX_APP_ID, false);
+        WXEntryActivity.api.registerApp(WX_APP_ID);
         call.resolve();
     }
 
