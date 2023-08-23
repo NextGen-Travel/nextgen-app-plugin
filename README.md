@@ -55,10 +55,10 @@ wxInit(params: { appId: string; }) => Promise<any>
 ### wxLogin()
 
 ```typescript
-wxLogin() => Promise<{ token: string; }>
+wxLogin() => Promise<{ code: string; }>
 ```
 
-**Returns:** <code>Promise&lt;{ token: string; }&gt;</code>
+**Returns:** <code>Promise&lt;{ code: string; }&gt;</code>
 
 --------------------
 

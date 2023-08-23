@@ -1,0 +1,57 @@
+{
+  "api": {
+    "name": "NextgenAppPluginPlugin",
+    "slug": "nextgenapppluginplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "echo",
+        "signature": "(options: { value: string; }) => Promise<{ value: string; }>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ value: string; }"
+          }
+        ],
+        "returns": "Promise<{ value: string; }>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "echo"
+      },
+      {
+        "name": "wxInit",
+        "signature": "(params: { appId: string; }) => Promise<any>",
+        "parameters": [
+          {
+            "name": "params",
+            "docs": "",
+            "type": "{ appId: string; }"
+          }
+        ],
+        "returns": "Promise<any>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "wxinit"
+      },
+      {
+        "name": "wxLogin",
+        "signature": "() => Promise<{ code: string; }>",
+        "parameters": [],
+        "returns": "Promise<{ code: string; }>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "wxlogin"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [],
+  "enums": [],
+  "typeAliases": [],
+  "pluginConfigs": []
+}
