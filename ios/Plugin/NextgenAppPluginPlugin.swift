@@ -34,7 +34,7 @@ public class NextgenAppPluginPlugin: CAPPlugin {
         NextgenAppPluginPlugin.responseCall = call
     }
     
-    static func onResponse(_ resp: BaseResp) {
+    static public func onResponse(_ resp: BaseResp) {
         print("response \(resp)")
         if let response = resp as? SendAuthResp {
             let code = response.code
