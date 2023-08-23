@@ -30,14 +30,15 @@ public class NextgenAppPluginPlugin: CAPPlugin {
         let request = SendAuthReq()
         request.scope = "snsapi_userinfo"
         request.state = "wechat"
-        WXApi.sendAuthReq(request, viewController: UIViewController(), delegate: nil)
+        DispatchQueue.main.async {
+            WXApi.sendAuthReq(request, viewController: UIViewController(), delegate: nil)
+        }
         NextgenAppPluginPlugin.responseCall = call
     }
     
     static public func onResponse(_ resp: BaseResp) {
         print("response \(resp)")
-        if let response = resp as? SendAuthResp {
-            let code = response.code
+        if let response = resp as? SendAuthResp, let code = response.code {
             responseCall.resolve([
                 "code": code
             ])
