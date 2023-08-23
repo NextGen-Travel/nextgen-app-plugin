@@ -12,7 +12,7 @@ import WechatOpenSDK
 @objc(NextgenAppPluginPlugin)
 public class NextgenAppPluginPlugin: CAPPlugin {
     private let implementation = NextgenAppPlugin()
-    private var responseCall = CAPPluginCall()
+    static var responseCall = CAPPluginCall()
     @objc func echo(_ call: CAPPluginCall) {
         let value = call.getString("value") ?? ""
         call.resolve([
@@ -31,10 +31,10 @@ public class NextgenAppPluginPlugin: CAPPlugin {
         request.scope = "snsapi_userinfo"
         request.state = "wechat"
         WXApi.sendAuthReq(request, viewController: UIViewController(), delegate: nil)
-        responseCall = call
+        NextgenAppPluginPlugin.responseCall = call
     }
     
-    func onResponse(_ resp: BaseResp) {
+    static func onResponse(_ resp: BaseResp) {
         print("response \(resp)")
         if let response = resp as? SendAuthResp {
             let code = response.code
@@ -46,12 +46,5 @@ public class NextgenAppPluginPlugin: CAPPlugin {
                 "code": ""
             ])
         }
-    }
-}
-extension NextgenAppPluginPlugin: UIApplicationDelegate, WXApiDelegate {
-
-    public func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        print("url is \(url)")
-        return true
     }
 }
