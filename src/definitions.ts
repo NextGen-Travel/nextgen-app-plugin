@@ -1,5 +1,7 @@
 export interface NextgenAppPluginPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
+  echo(options: { value: string }): Promise<{ value: string }>
   wxInit(params: { appId: string }): Promise<any>
-  wxLogin(): Promise<any>;
+  wxLogin(): Promise<{
+    token: string
+  }>
 }
