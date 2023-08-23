@@ -54,7 +54,7 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
                 if (code != null) {
                     JSObject ret = new JSObject();
                     // 在這裡處理登錄成功後的邏輯，例如獲取用戶資訊等
-                    ret.put("token", code);
+                    ret.put("code", code);
                     callback.resolve(ret);
                 } else {
                     // 登錄失敗
