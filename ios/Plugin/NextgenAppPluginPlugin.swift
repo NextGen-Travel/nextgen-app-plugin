@@ -10,7 +10,7 @@ import WechatOpenSDK
  * here: https://capacitorjs.com/docs/plugins/ios
  */
 @objc(NextgenAppPluginPlugin)
-public class NextgenAppPluginPlugin: CAPPlugin, WXApiDelegate {
+public class NextgenAppPluginPlugin: CAPPlugin {
     private let implementation = NextgenAppPlugin()
     private var responseCall = CAPPluginCall()
     @objc func echo(_ call: CAPPluginCall) {
@@ -30,11 +30,11 @@ public class NextgenAppPluginPlugin: CAPPlugin, WXApiDelegate {
         let request = SendAuthReq()
         request.scope = "snsapi_userinfo"
         request.state = "wechat"
-        WXApi.sendAuthReq(request, viewController: UIViewController(), delegate: self)
+        WXApi.sendAuthReq(request, viewController: UIViewController(), delegate: nil)
         responseCall = call
     }
     
-    public func onResp(_ resp: BaseResp) {
+    func onResponse(_ resp: BaseResp) {
         print("response \(resp)")
         if let response = resp as? SendAuthResp {
             let code = response.code
@@ -46,5 +46,12 @@ public class NextgenAppPluginPlugin: CAPPlugin, WXApiDelegate {
                 "code": ""
             ])
         }
+    }
+}
+extension NextgenAppPluginPlugin: UIApplicationDelegate, WXApiDelegate {
+
+    public func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        print("url is \(url)")
+        return true
     }
 }
