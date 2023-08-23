@@ -1,5 +1,6 @@
 import Foundation
 import Capacitor
+import WechatOpenSDK
 
 // TODO:
 // import WXApi.h
