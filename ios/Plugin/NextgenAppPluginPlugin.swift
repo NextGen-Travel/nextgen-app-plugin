@@ -1,6 +1,7 @@
 import Foundation
 import Capacitor
-import WXApi.h
+// TODO:
+// import WXApi.h
 
 /**
  * Please read the Capacitor iOS Plugin Development Guide
