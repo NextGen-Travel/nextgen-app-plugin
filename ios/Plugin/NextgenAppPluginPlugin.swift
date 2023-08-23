@@ -21,11 +21,10 @@ public class NextgenAppPluginPlugin: CAPPlugin {
     @objc func wxInit(_ call: CAPPluginCall) {
         let value = call.getString("appId") ?? ""
         print(value)
-        call.resolve([])
+        call.resolve()
     }
 
     @objc func wxLogin(_ call: CAPPluginCall) {
-        
         call.resolve([
             "code": "123"
         ])
