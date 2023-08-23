@@ -8,11 +8,11 @@ import Foundation
         return value
     }
 
-    @objc func wxInit() {
+    @objc func wxInit() -> String {
         return "objc"
     }
     
-    @objc func wxLogin() {
+    @objc func wxLogin() -> String {
         return "objc"
     }
 }

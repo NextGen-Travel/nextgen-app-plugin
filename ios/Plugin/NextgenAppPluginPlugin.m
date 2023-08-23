@@ -7,6 +7,4 @@ CAP_PLUGIN(
     NextgenAppPluginPlugin,
     "NextgenAppPlugin",
     CAP_PLUGIN_METHOD(echo, CAPPluginReturnPromise);
-    CAP_PLUGIN_METHOD(wxInit, CAPPluginReturnPromise);
-    CAP_PLUGIN_METHOD(wxLogin, CAPPluginReturnPromise);
 )
