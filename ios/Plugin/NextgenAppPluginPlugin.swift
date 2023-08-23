@@ -35,9 +35,16 @@ public class NextgenAppPluginPlugin: CAPPlugin, WXApiDelegate {
     }
     
     public func onResp(_ resp: BaseResp) {
-        responseCall.resolve([
-            "code":"456"
-        ])
         print("response \(resp)")
+        if let response = resp as? SendAuthResp {
+            let code = response.code
+            responseCall.resolve([
+                "code": code
+            ])
+        } else {
+            responseCall.resolve([
+                "code": ""
+            ])
+        }
     }
 }
