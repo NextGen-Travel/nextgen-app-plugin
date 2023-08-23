@@ -19,16 +19,15 @@ public class NextgenAppPluginPlugin: CAPPlugin {
     }
     
     func wxInit(_ call: CAPPluginCall) {
-        let value = call.getString("value") ?? ""
         call.resolve([
-            "value": implementation.echo(value)
+            "value": "123"
         ])
     }
     
     func wxLogin(_ call: CAPPluginCall) {
         let value = call.getString("value") ?? ""
         call.resolve([
-            "value": implementation.echo(value)
+            "value": "123"
         ])
     }
 }

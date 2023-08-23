@@ -7,4 +7,12 @@ import Foundation
         print(value)
         return value
     }
+
+    @objc func wxInit() {
+        return "objc"
+    }
+    
+    @objc func wxLogin() {
+        return "objc"
+    }
 }
