@@ -22,18 +22,16 @@ public class NextgenAppPluginPlugin: CAPPlugin {
 
     @objc func wxInit(_ call: CAPPluginCall) {
         let appId = call.getString("appId") ?? ""
-
-        
-        
+        WXApi.registerApp(appId, universalLink: "https://e-drugsearch/")
         
         call.resolve()
     }
 
     @objc func wxLogin(_ call: CAPPluginCall) {
-        
-        
-        
-        
+        let request = SendAuthReq()
+        request.scope = "snsapi_userinfo"
+        request.state = "wechat"
+        WXApi.sendAuthReq(request, viewController: UIViewController(), delegate: nil)
         call.resolve([
             "code": "123"
         ])
