@@ -2,9 +2,6 @@ import Foundation
 import Capacitor
 import WechatOpenSDK
 
-// TODO:
-// import WXApi.h
-
 /**
  * Please read the Capacitor iOS Plugin Development Guide
  * here: https://capacitorjs.com/docs/plugins/ios
