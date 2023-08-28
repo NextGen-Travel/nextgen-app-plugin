@@ -22,7 +22,7 @@ public class NextgenAppPluginPlugin: CAPPlugin {
     @objc func wxInit(_ call: CAPPluginCall) {
         let appId = call.getString("appId") ?? ""
         let universalLink = call.getString("universalLink") ?? ""
-        WXApi.registerApp(appId, universalLink)
+        WXApi.registerApp(appId, universalLink: universalLink)
         call.resolve()
     }
 
