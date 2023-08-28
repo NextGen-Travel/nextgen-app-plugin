@@ -40,12 +40,14 @@ echo(options: { value: string; }) => Promise<{ value: string; }>
 ### wxInit(...)
 
 ```typescript
-wxInit(params: { appId: string; }) => Promise<any>
+wxInit(params: { appId: string; universalLink?: string; }) => Promise<any>
 ```
 
-| Param        | Type                            |
-| ------------ | ------------------------------- |
-| **`params`** | <code>{ appId: string; }</code> |
+universalLink 是 ios 登入必要的參數
+
+| Param        | Type                                                    |
+| ------------ | ------------------------------------------------------- |
+| **`params`** | <code>{ appId: string; universalLink?: string; }</code> |
 
 **Returns:** <code>Promise&lt;any&gt;</code>
 

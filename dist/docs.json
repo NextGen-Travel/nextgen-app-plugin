@@ -23,17 +23,17 @@
       },
       {
         "name": "wxInit",
-        "signature": "(params: { appId: string; }) => Promise<any>",
+        "signature": "(params: { appId: string; universalLink?: string; }) => Promise<any>",
         "parameters": [
           {
             "name": "params",
             "docs": "",
-            "type": "{ appId: string; }"
+            "type": "{ appId: string; universalLink?: string | undefined; }"
           }
         ],
         "returns": "Promise<any>",
         "tags": [],
-        "docs": "",
+        "docs": "universalLink 是 ios 登入必要的參數",
         "complexTypes": [],
         "slug": "wxinit"
       },
